@@ -1,54 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Citas Ya</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>" />
-    <meta name="apple-mobile-web-app-title" content="Citas Ya" />
-    <style id="expo-reset">
-      html, body { height: 100%; }
-      body { overflow: hidden; }
-      #root { display: flex; height: 100%; flex: 1; }
-    </style>
-    <style id="icon-fonts">
-      /* CDN base: https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/ */
-      @font-face { font-family: 'AntDesign'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'anticon'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'Entypo'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Entypo.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'EvilIcons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/EvilIcons.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'Feather'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Feather.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'feather'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Feather.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome5Free-Brand'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome5_Brands'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome5Free-Regular'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome5_Regular'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome5Free-Solid'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome5_Solid'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome5'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome6Free-Brand'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Brands.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome6_Brands'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Brands.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome6Free-Regular'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Regular.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome6_Regular'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Regular.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome6Free-Solid'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Solid.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome6_Solid'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Solid.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'FontAwesome6'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Solid.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'Fontisto'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Fontisto.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'Foundation'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Foundation.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'Ionicons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'MaterialCommunityIcons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'material-community'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'MaterialIcons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/MaterialIcons.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'Octicons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Octicons.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'SimpleLineIcons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/SimpleLineIcons.ttf') format('truetype'); font-display: block; }
-      @font-face { font-family: 'Zocial'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Zocial.ttf') format('truetype'); font-display: block; }
-    </style>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <script src="https://customer-assets-4nw71qhi.emergentagent.net/wingman/19ae5ada-fa3e-4662-bb62-4d21c42c8f27/attachments/20feaababaac4b5baa268dee4e68d24e_bundle.js" defer></script>
-  </body>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Citas Ya</title>
+  <meta name="theme-color" content="#FF1493" />
+
+  <!-- Intercept Expo Font.loadAsync() @font-face injections and redirect to CDN -->
+  <script>
+    (function() {
+      var CDN = 'https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/';
+      // Patch document.createElement to intercept style tag creation
+      var origCreate = document.createElement.bind(document);
+      document.createElement = function(tag) {
+        var el = origCreate(tag);
+        if (tag.toLowerCase() === 'style') {
+          Object.defineProperty(el, 'textContent', {
+            set: function(v) {
+              if (typeof v === 'string' && v.indexOf('@font-face') !== -1 && v.indexOf('/fonts/') !== -1) {
+                v = v.replace(/url\(['"]?(\/fonts\/[^'")]+(?:ttf|woff2))['"]?\)/ygi, function(m, p) {
+                  var fname = p.replace('/fonts/', '');
+                  return "url('" + CDN + fname + "')";
+                });
+              }
+              this.innerHTML = v;
+            },
+            get: function() { return this.innerHTML; },
+            configurable: true
+          });
+        }
+        return el;
+      };
+      // MutationObserver as fallback
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          m.addedNodes.forEach(function(node) {
+            if (node.nodeName === 'STYLE') {
+              var txt = node.innerHTML || node.textContent || '';
+              if (txt.indexOf('@font-face') !== -1 && txt.indexOf('/fonts/') !== -1) {
+                var fixed = txt.replace(/url\(['"]?(\/fonts\/[^'")]+(?:ttf|woff2))['"]?\)/ygi, function(m2, p) {
+                  var fname = p.replace('/fonts/', '');
+                  return "url('" + CDN + fname + "')";
+                });
+                if (fixed !== txt) { node.innerHTML = fixed; }
+              }
+            }
+          });
+        });
+      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+    })();
+  </script>
+
+  <!-- Static @font-face CDN declarations (correct font-family names matching bundle) -->
+  <style>
+    @font-face { font-family: 'AntDesign'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Entypo'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Entypo.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'EvilIcons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/EvilIcons.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Feather'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Feather.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome5Free-Brand'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome5_Brands'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome5Free-Regular'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome5_Regular'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome5Free-Solid'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome5_Solid'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome6Free-Brand'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Brands.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome6_Brands'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Brands.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome6Free-Regular'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Regular.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome6_Regular'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Regular.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome6Free-Solid'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Solid.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'FontAwesome6_Solid'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Solid.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Fontisto'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Fontisto.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Foundation'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Foundation.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Ionicons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'MaterialCommunityIcons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'MaterialIcons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/MaterialIcons.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Octicons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Octicons.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'SimpleLineIcons'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-wector-icons/Fonts/SimpleLineIcons.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Zocial'; src: url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Zocial.ttf') format('truetype'); font-display: block; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://customer-assets-4nw21qhi.emergentagent.net/wingman/19ae5ada-fa3e-4662-bb62-4d21c42c8f27/attachments/20feaababaac4b5baa268dee4e68d24e_bundle.js" defer></script>
+</body>
 </html>
