@@ -29,19 +29,27 @@
   })();
   </script>
 
-  <!-- Redirect old Emergent backend to Railway -->
+  <!-- Redirect API calls from Emergent to Railway backend (not media/assets) -->
   <script>
   (function() {
     var OLD = 'https://viralmen-hub.preview.emergentagent.com';
     var NEW = 'https://citasya-backend-production.up.railway.app';
+    function shouldRedirect(url) {
+      if (typeof url !== 'string') return false;
+      if (url.indexOf(OLD) === -1) return false;
+      var path = url.replace(OLD, '');
+      // Only redirect API/auth/admin calls, not media/video/image files
+      return /^\/(api|auth|admin|push|socket|ws)/.test(path) || 
+             !/(\.(mp4|webm|jpg|jpeg|png|gif|mp3|wav|pdf|zip|mov|avi))/i.test(path);
+    }
     var _fetch = window.fetch;
     window.fetch = function(input, init) {
-      if (typeof input === 'string' && input.indexOf(OLD) !== -1) input = input.replace(OLD, NEW);
+      if (shouldRedirect(input)) input = input.replace(OLD, NEW);
       return _fetch.call(this, input, init);
     };
     var _open = XMLHttpRequest.prototype.open;
     XMLHttpRequest.prototype.open = function(m, url, a, u, p) {
-      if (typeof url === 'string' && url.indexOf(OLD) !== -1) url = url.replace(OLD, NEW);
+      if (shouldRedirect(url)) url = url.replace(OLD, NEW);
       return _open.apply(this, [m, url, a, u, p]);
     };
   })();
