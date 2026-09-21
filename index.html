@@ -22,8 +22,8 @@
       }
       return u;
     }
-    var _fetch = window.fetch;
-    window.fetch = function(input, init) { return _fetch(fixURL(input), init); };
+    var _fetch0 = window.fetch;
+    window.fetch = function(input, init) { return _fetch0(fixURL(input), init); };
     var _FF = window.FontFace;
     if (_FF) {
       window.FontFace = function(family, src, desc) {
@@ -35,23 +35,40 @@
   })();
   </script>
 
-  <!-- Redirect API calls: Emergent preview → Railway backend -->
+  <!-- Redirect API calls: Emergent preview -> Railway backend (persistent) -->
   <script>
   (function() {
     var EMERGENT = 'https://viralmen-hub.preview.emergentagent.com';
     var RAILWAY  = 'https://citasya-backend-production.up.railway.app';
+    var API_PATHS = /^\/(api|auth|admin|push|socket|ws)[\/\?#]?/;
+
     function shouldRedirect(url) {
       if (typeof url !== 'string') return false;
       if (url.indexOf(EMERGENT) === -1) return false;
-      var path = url.replace(EMERGENT, '');
-      return /^\/(api|auth|admin|push|socket|ws)/.test(path) ||
-             !/(\.(mp4|webm|jpg|jpeg|png|gif|mp3|wav|pdf|zip|mov|avi))/i.test(path);
+      var path = url.slice(EMERGENT.length);
+      return API_PATHS.test(path);
     }
-    var _fetch = window.fetch;
-    window.fetch = function(input, init) {
-      if (shouldRedirect(input)) input = input.replace(EMERGENT, RAILWAY);
-      return _fetch.call(this, input, init);
-    };
+
+    function wrapFetch(fn) {
+      return function(input, init) {
+        if (shouldRedirect(input)) input = input.replace(EMERGENT, RAILWAY);
+        return fn.apply(this, [input, init]);
+      };
+    }
+
+    var intercepted = wrapFetch(window.fetch);
+
+    try {
+      Object.defineProperty(window, 'fetch', {
+        get: function() { return intercepted; },
+        set: function(newFn) { intercepted = wrapFetch(newFn); },
+        configurable: true,
+        enumerable: true
+      });
+    } catch(e) {
+      window.fetch = intercepted;
+    }
+
     var _open = XMLHttpRequest.prototype.open;
     XMLHttpRequest.prototype.open = function(m, url, a, u, p) {
       if (shouldRedirect(url)) url = url.replace(EMERGENT, RAILWAY);
@@ -78,6 +95,6 @@
 <body>
   <noscript>Necesitas JavaScript para usar esta app.</noscript>
   <div id="root"></div>
-  <script src="https://viralmen-hub.preview.emergentagent.com/node_modules/expo-router/entry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable" defer></script>
+  <script src="https://viralmen-hub.preview.emergentagent.com/node_modules/expo-router/entry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable&bust=20260921182000" defer></script>
 </body>
 </html>
