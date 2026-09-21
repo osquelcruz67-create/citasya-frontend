@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-# Cache bust: 20260920235354
+# Cache bust: 20260921180802
 # Download icon fonts from jsDelivr CDN v14 (matches bundle)
 RUN apk add --no-cache wget curl && \
     mkdir -p /usr/share/nginx/html/fonts && \
@@ -17,7 +17,7 @@ RUN apk add --no-cache wget curl && \
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Always download the latest index.html from GitHub (never use Docker cache for this)
-RUN curl -fsSL "https://raw.githubusercontent.com/osquelcruz67-create/citasya-frontend/main/index.html?bust=20260920235354" \
+RUN curl -fsSL "https://raw.githubusercontent.com/osquelcruz67-create/citasya-frontend/main/index.html?bust=20260921180802" \
     -o /usr/share/nginx/html/index.html
 
 EXPOSE 8080
