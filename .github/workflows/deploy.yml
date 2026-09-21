@@ -29,17 +29,7 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/osquelcruz67-create/citasya-frontend:latest
-
-      - name: Update Railway service to use new image
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: |
-          curl -s -X POST https://backboard.railway.app/graphql/v2 \
-            -H "Authorization: Bearer $RAILWAY_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "query": "mutation { serviceInstanceUpdate(input: { source: { image: \"ghcr.io/osquelcruz67-create/citasya-frontend:latest\" } }, environmentId: \"07508ae1-7eba-4b30-a79a-e0ad89f1dde8\", serviceId: \"8f929903-c9dc-47c4-b944-b36df5f5da80\") }"
-            }'
+          no-cache: true
 
       - name: Trigger Railway redeploy
         env:
@@ -49,6 +39,6 @@ jobs:
             -H "Authorization: Bearer $RAILWAY_TOKEN" \
             -H "Content-Type: application/json" \
             -d '{
-              "query": "mutation { deploymentRedeploy(id: \"771286c7-ad89-4029-9f2b-4afcc701cd5f\") { id status } }"
+              "query": "mutation { serviceInstanceDeploy(serviceId: \"8f929903-c9dc-47c4-b944-b36df5f5da80\", environmentId: \"07508ae1-61e0-4bb7-916c-194dec882dc9\", latestCommit: true) }"
             }'
           echo "Deploy triggered!"
