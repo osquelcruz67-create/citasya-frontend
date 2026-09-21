@@ -6,7 +6,13 @@
   <title>Citas Ya</title>
   <meta name="theme-color" content="#FF1493" />
 
-  <!-- Redirect /fonts/*.ttf requests to jsDelivr CDN before the bundle runs -->
+  <style id="expo-reset">
+    html, body { height: 100%; }
+    body { overflow: hidden; }
+    #root { display: flex; height: 100%; flex: 1; }
+  </style>
+
+  <!-- Redirect /fonts/*.ttf to jsDelivr CDN -->
   <script>
   (function() {
     var CDN = 'https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/';
@@ -29,27 +35,26 @@
   })();
   </script>
 
-  <!-- Redirect API calls from Emergent to Railway backend (not media/assets) -->
+  <!-- Redirect API calls: Emergent preview → Railway backend -->
   <script>
   (function() {
-    var OLD = 'https://viralmen-hub.preview.emergentagent.com';
-    var NEW = 'https://citasya-backend-production.up.railway.app';
+    var EMERGENT = 'https://viralmen-hub.preview.emergentagent.com';
+    var RAILWAY  = 'https://citasya-backend-production.up.railway.app';
     function shouldRedirect(url) {
       if (typeof url !== 'string') return false;
-      if (url.indexOf(OLD) === -1) return false;
-      var path = url.replace(OLD, '');
-      // Only redirect API/auth/admin calls, not media/video/image files
-      return /^\/(api|auth|admin|push|socket|ws)/.test(path) || 
+      if (url.indexOf(EMERGENT) === -1) return false;
+      var path = url.replace(EMERGENT, '');
+      return /^\/(api|auth|admin|push|socket|ws)/.test(path) ||
              !/(\.(mp4|webm|jpg|jpeg|png|gif|mp3|wav|pdf|zip|mov|avi))/i.test(path);
     }
     var _fetch = window.fetch;
     window.fetch = function(input, init) {
-      if (shouldRedirect(input)) input = input.replace(OLD, NEW);
+      if (shouldRedirect(input)) input = input.replace(EMERGENT, RAILWAY);
       return _fetch.call(this, input, init);
     };
     var _open = XMLHttpRequest.prototype.open;
     XMLHttpRequest.prototype.open = function(m, url, a, u, p) {
-      if (shouldRedirect(url)) url = url.replace(OLD, NEW);
+      if (shouldRedirect(url)) url = url.replace(EMERGENT, RAILWAY);
       return _open.apply(this, [m, url, a, u, p]);
     };
   })();
@@ -71,7 +76,8 @@
   </style>
 </head>
 <body>
+  <noscript>Necesitas JavaScript para usar esta app.</noscript>
   <div id="root"></div>
-  <script src="https://customer-assets-4nw71qhi.emergentagent.net/wingman/19ae5ada-fa3e-4662-bb62-4d21c42c8f27/attachments/20feaababaac4b5baa268dee4e68d24e_bundle.js" defer></script>
+  <script src="https://viralmen-hub.preview.emergentagent.com/node_modules/expo-router/entry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable" defer></script>
 </body>
 </html>
