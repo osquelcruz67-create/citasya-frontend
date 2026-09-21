@@ -29,6 +29,24 @@
   })();
   </script>
 
+  <!-- Redirect old Emergent backend to Railway -->
+  <script>
+  (function() {
+    var OLD = 'https://viralmen-hub.preview.emergentagent.com';
+    var NEW = 'https://citasya-backend-production.up.railway.app';
+    var _fetch = window.fetch;
+    window.fetch = function(input, init) {
+      if (typeof input === 'string' && input.indexOf(OLD) !== -1) input = input.replace(OLD, NEW);
+      return _fetch.call(this, input, init);
+    };
+    var _open = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(m, url, a, u, p) {
+      if (typeof url === 'string' && url.indexOf(OLD) !== -1) url = url.replace(OLD, NEW);
+      return _open.apply(this, [m, url, a, u, p]);
+    };
+  })();
+  </script>
+
   <style>
     @font-face{font-family:'AntDesign';src:url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf')format('truetype');font-display:block}
     @font-face{font-family:'Entypo';src:url('https://cdn.jsdelivr.net/npm/@expo/vector-icons@14/build/vendor/react-native-vector-icons/Fonts/Entypo.ttf')format('truetype');font-display:block}
