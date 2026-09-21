@@ -40,13 +40,13 @@
   (function() {
     var EMERGENT = 'https://viralmen-hub.preview.emergentagent.com';
     var RAILWAY  = 'https://citasya-backend-production.up.railway.app';
-    var API_PATHS = /^\/(api|auth|admin|push|socket|ws)[\/\?#]?/;
+    var API_PATHS = /^\/( api|auth|admin|push|socket|ws)[\/?#]?/;
 
     function shouldRedirect(url) {
       if (typeof url !== 'string') return false;
       if (url.indexOf(EMERGENT) === -1) return false;
       var path = url.slice(EMERGENT.length);
-      return API_PATHS.test(path);
+      return /^\/(api|auth|admin|push|socket|ws)/.test(path);
     }
 
     function wrapFetch(fn) {
@@ -95,6 +95,6 @@
 <body>
   <noscript>Necesitas JavaScript para usar esta app.</noscript>
   <div id="root"></div>
-  <script src="https://viralmen-hub.preview.emergentagent.com/node_modules/expo-router/entry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable&bust=20260921182000" defer></script>
+  <script src="https://viralmen-hub.preview.emergentagent.com/20feaababaac4b5baa268dee4e68d24e_bundle.js?bust=20260921183000"></script>
 </body>
 </html>
